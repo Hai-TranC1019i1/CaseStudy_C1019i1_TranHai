@@ -47,8 +47,9 @@ function saveAndBackHome(index) {
 function displayDrinking(indexTable) {
     let drawListDrinking = "<table width='1300' height='600'>";
     let k = 0;
+    console.log('display', ListTable[indexTable].TypeOfDrinkAndAmout);
     for (let i = 0; i < 2; i++) {
-        drawListDrinking += "<tr>"
+        drawListDrinking += "<tr>";
         for (let j = 0; j < 4; j++) {
             drawListDrinking += "<td>" +
                 "<img src=" + "'images/" + ListDrinking[k].name + ".jpg" + "' width='300' height='300'" +
@@ -69,7 +70,6 @@ function displayDrinking(indexTable) {
         "type='button'><input onclick='payBill(" + indexTable + ")' value='Pay' type='button'>" +
         "<input type='button' value='EmptyTable' onclick='emptyTable(" + indexTable + ")'><br></td></tr></table>";
     display.innerHTML = drawListDrinking;
-    ListTable[indexTable].resetTable();
 };
 
 function displayMainApp() {
