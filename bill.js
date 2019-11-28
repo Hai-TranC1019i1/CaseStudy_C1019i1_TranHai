@@ -10,7 +10,7 @@ let Bill = function () {
         let date = new Date();
         let amount = 0;
         this.id = "b" + stt + date.valueOf();
-        bill += "<p><strong>&nbsp;&nbsp;&nbsp;while(alive){sleep(); code(); eat();}</strong></p>"
+        bill += "<p><strong>&nbsp;&nbsp;&nbsp;while (alive) {sleep(); code(); eat(); };</strong></p>"
         bill += "<p>Date: " + date.toDateString() + "</p>";
         bill += "<p>CodeBill: " + this.id + "</p>";
         bill += '<hr><br>';
@@ -24,7 +24,7 @@ let Bill = function () {
         }
         bill += "<tr><td>Total:</td><td></td><td>" + price + ".000 VND</td></tr>" +
             "<tr><td><input type='button' value='Home' onclick='displayMainApp()'>" +
-            "</td><td><input type='button' value='EmptyTable' onclick='emptyTable(" + index + ")'></td></tr></table>";
+            "</td><td><input type='button' value='CleanTable' onclick='emptyTable(" + index + ")'></td></tr></table>";
         display.innerHTML = bill;
         stt++;
     };
@@ -43,3 +43,8 @@ let bill8 = new Bill();
 let bill9 = new Bill();
 
 let ListBill = [bill1, bill2, bill3, bill4, bill5, bill6, bill7, bill8, bill9];
+// let ListBill = [];
+//
+// for (let i = 0; i < 9; i++)
+//      let billTable = new Bill();
+// ListBill.push(billTable);
