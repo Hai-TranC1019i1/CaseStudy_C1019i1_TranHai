@@ -23,7 +23,7 @@ let Table = function (idTable) {
     }
     this.screen = '';
     this.resetTable = function () {
-        for (let i = 0; i < this.TypeOfDrinkAndAmout.length; i++) {
+        for (let i = 0; i < ListDrinking.length; i++) {
             this.TypeOfDrinkAndAmout[i] = 0;
         }
     }
@@ -43,9 +43,3 @@ let Table = function (idTable) {
 // let ListTable = [Table1, Table2, Table3, Table4, Table5, Table6, Table7, Table8, Table9];
 
 
-let ListTable = [];
-for (let i = 0; i < 9; i++) {
-    let table = new Table('t00'+i);
-    ListTable.push(table);
-    ListTable[i].resetTable();
-}
