@@ -1,80 +1,25 @@
-// function clickAdd(indexDrink, indexTable) {
-//     let idAmount = 'amountDrinking' + indexDrink;
-//     ListTable[indexTable].TypeOfDrinkAndAmout[indexDrink] = document.getElementById(idAmount).value;
-//     ListTable[indexTable].addAmount(indexDrink);
-//     document.getElementById(idAmount).value = ListTable[indexTable].TypeOfDrinkAndAmout[indexDrink];
-// };
-//
-// function clickSub(indexDrink, indexTable) {
-//     let idAmount = 'amountDrinking' + indexDrink;
-//     if (ListTable[indexTable].TypeOfDrinkAndAmout[indexDrink] > 0) {
-//         ListTable[indexTable].TypeOfDrinkAndAmout[indexDrink] = document.getElementById(idAmount).value;
-//         ListTable[indexTable].subAmount(indexDrink);
-//         document.getElementById(idAmount).value = ListTable[indexTable].TypeOfDrinkAndAmout[indexDrink];
-//     }
-//     ;
-// };
-//
-// function payBill(index) {
-//     console.log(ListTable[index].TypeOfDrinkAndAmout);
-//     for (let i = 0; i < ListDrinking.length; i++)
-//         if (ListTable[index].TypeOfDrinkAndAmout[i] != 0) {
-//             ListBill[index].payAndPrintBill(index);
-//             ListTable[index].havePaid = true;
-//             ListTable[index].isEmty = false;
-//             return;
-//         }
-// }
-//
-// function emptyTable(index) {
-//     console.log(ListTable[index].TypeOfDrinkAndAmout);
-//     ListTable[index].isEmty = true;
-//     ListTable[index].havePaid = false;
-//     ListTable[index].resetTable();
-//     displayMainApp();
-// }
-//
-// function saveAndBackHome(index) {
-//     console.log(ListTable[index].TypeOfDrinkAndAmout);
-//     for (let i = 0; i < ListDrinking.length; i++)
-//         if (ListTable[index].TypeOfDrinkAndAmout[i] != 0) {
-//             ListTable[index].isEmty = false;
-//             break;
-//         }
-//    displayMainApp();
-// };
-//
-// let display = document.getElementById('displayApp');
-// let screen = new Screen();
-//
-// init();
-
-function clickAdd(indexDrink, indexTable) {
+function clickAdd(indexDrink) {
     let idAmount = 'amountDrinking' + indexDrink;
-    ListTable[indexTable].TypeOfDrinkAndAmout[indexDrink] = document.getElementById(idAmount).value;
-    ListTable[indexTable].addAmount(indexDrink);
-    document.getElementById(idAmount).value = ListTable[indexTable].TypeOfDrinkAndAmout[indexDrink];
+    document.getElementById(idAmount).value = 1 + Number(document.getElementById(idAmount).value);
+    console.log(document.getElementById(idAmount).value);
 };
 
 function clickSub(indexDrink, indexTable) {
     let idAmount = 'amountDrinking' + indexDrink;
-    if (ListTable[indexTable].TypeOfDrinkAndAmout[indexDrink] > 0) {
-        ListTable[indexTable].TypeOfDrinkAndAmout[indexDrink] = document.getElementById(idAmount).value;
-        ListTable[indexTable].subAmount(indexDrink);
-        document.getElementById(idAmount).value = ListTable[indexTable].TypeOfDrinkAndAmout[indexDrink];
+    if (document.getElementById(idAmount).value > 0 && !ListTable[indexTable].havePaid) { //Chỉ trừ khi số lượng là dương, và khách chưa trả tiền
+        document.getElementById(idAmount).value = Number(document.getElementById(idAmount).value) - 1;
     }
     ;
 };
 
-function payBill(index) {
-    console.log(ListTable[index].TypeOfDrinkAndAmout);
-    for (let i = 0; i < ListDrinking.length; i++)
-        if (ListTable[index].TypeOfDrinkAndAmout[i] != 0) {
-            ListBill[index].payAndPrintBill(index);
-            ListTable[index].havePaid = true;
-            ListTable[index].isEmty = false;
-            return;
+function getDataAmount(index) {
+    let idAmount = '';
+    for (let i = 0; i < ListDrinking.length; i++) {
+        idAmount = 'amountDrinking' + i;
+        if (document.getElementById(idAmount).value != 0) {
+            ListTable[index].TypeOfDrinkAndAmout[i] = document.getElementById(idAmount).value;
         }
+    }
 }
 
 function displayMainApp() {
@@ -86,7 +31,7 @@ function displayDrinking(index) {
 }
 
 function emptyTable(index) {
-    if (!ListTable[index].isEmty &&  !ListTable[index].havePaid)
+    if (!ListTable[index].isEmty &&  !ListTable[index].havePaid) // Ngăn việc clean bàn khi khách chưa trả tiền
         return;
     else {
         ListTable[index].isEmty = true;
@@ -96,8 +41,22 @@ function emptyTable(index) {
     }
 }
 
+
+function payBill(index) {
+    getDataAmount(index);
+    for (let i = 0; i < ListDrinking.length; i++)
+        if (ListTable[index].TypeOfDrinkAndAmout[i] != 0) {
+            ListBill[index].payAndPrintBill(index);
+            ListTable[index].havePaid = true;
+            ListTable[index].isEmty = false;
+            return;
+        }
+
+}
+
+
 function saveAndBackHome(index) {
-    console.log(ListTable[index].TypeOfDrinkAndAmout);
+    getDataAmount(index);
     for (let i = 0; i < ListDrinking.length; i++)
         if (ListTable[index].TypeOfDrinkAndAmout[i] != 0) {
             ListTable[index].isEmty = false;

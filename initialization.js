@@ -1,26 +1,8 @@
 let display = document.getElementById('displayApp');
-let screen = new Screen();
+let screen = new Screen(2, 3, 4, 3);
+let numberOfTables = 9;
 
-let stt = 0;
-
-// let bill1 = new Bill();
-// let bill2 = new Bill();
-// let bill3 = new Bill();
-// let bill4 = new Bill();
-// let bill5 = new Bill();
-// let bill6 = new Bill();
-// let bill7 = new Bill();
-// let bill8 = new Bill();
-// let bill9 = new Bill();
-//
-// let ListBill = [bill1, bill2, bill3, bill4, bill5, bill6, bill7, bill8, bill9];
-let ListBill = [];
-
-for (let i = 0; i < 9; i++) {
-    let bill = new Bill();
-    ListBill.push(bill);
-}
-
+//Khởi tạo các loại đồ uống
 let MilkCoffee = new Drinking('d001', 'MilkCoffee', 20);
 let BlackCoffee = new Drinking('d002', 'BlackCoffee', 15);
 let Cacao = new Drinking('d003', 'Cacao', 25);
@@ -33,11 +15,19 @@ let GoldLotusTea = new Drinking('d008', 'GoldLotusTea', 45);
 let ListDrinking = [MilkCoffee, BlackCoffee, Cacao, LemonTea,
     MilkTeaMatcha, MilkTeaPearlBlackSugar, MilkTeaTaro, GoldLotusTea];
 
+//Khởi tạo mảng các đối tượng table, khởi tạo mảng lưu trữ danh sách oder
 let ListTable = [];
-for (let i = 0; i < 9; i++) {
+for (let i = 0; i < numberOfTables; i++) {
     let table = new Table('t00'+i);
     ListTable.push(table);
     ListTable[i].resetTable();
-    console.log(ListTable[0].TypeOfDrinkAndAmout);
+}
+
+//Khởi tạo danh sách đối tượng hóa đơn
+let stt = 0;
+let ListBill = [];
+for (let i = 0; i < numberOfTables; i++) {
+    let bill = new Bill();
+    ListBill.push(bill);
 }
 screen.init();
